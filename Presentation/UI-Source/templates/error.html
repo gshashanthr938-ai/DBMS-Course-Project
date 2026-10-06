@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<section class="panel error-panel"><div class="eyebrow">PLEASE CHECK THIS STEP</div><h1>{{ title }}</h1><p>{{ message }}</p><div class="actions"><button data-back>Go back to the form</button><a href="{{ url_for('dashboard') }}">Return to overview</a></div></section>{% endblock %}

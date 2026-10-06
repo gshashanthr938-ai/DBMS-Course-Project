@@ -1,0 +1,14 @@
+*.pdf binary
+*.pptx binary
+*.png binary
+*.docx binary
+*.jpg binary
+*.jpeg binary
+*.sql text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.ps1 text eol=crlf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf

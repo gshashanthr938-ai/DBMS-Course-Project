@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% from 'macros.html' import heading,grid with context %}{% block content %}{{ heading('CHANGE HISTORY','Activity log','The most recent 300 successful application actions.') }}<section class="panel">{{ grid(rows,['created_at','username','action','detail']) }}</section>{% endblock %}

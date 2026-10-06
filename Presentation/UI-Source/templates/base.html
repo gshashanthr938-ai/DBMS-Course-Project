@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{{ title }} · Campus Ledger</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"><script defer src="{{ url_for('static',filename='app.js') }}"></script></head>
+<body>{% if user %}<aside class="sidebar"><a class="brand" href="{{ url_for('dashboard') }}"><span class="brandmark">CL</span><span>Campus Ledger<small>Student & college management</small></span></a><div class="nav-caption">WORKSPACE</div><nav>
+<a href="{{ url_for('dashboard') }}">Overview</a>
+{% if user.role in ['ADMIN','EXAMS','ACCOUNTS','HOD'] %}<a href="{{ url_for('students') }}">Students</a>{% endif %}
+{% if user.role=='ADMIN' %}<a href="{{ url_for('registrations') }}">Registrations</a>{% endif %}
+{% if user.role in ['ADMIN','FACULTY'] %}<a href="{{ url_for('attendance_page') }}">Attendance</a>{% endif %}
+{% if user.role in ['ADMIN','FACULTY','EXAMS'] %}<a href="{{ url_for('examinations') }}">Examinations & grades</a>{% endif %}
+{% if user.role in ['ADMIN','ACCOUNTS'] %}<a href="{{ url_for('fees') }}">Fees & payments</a>{% endif %}
+<a href="{{ url_for('reports') }}">Reports</a>
+{% if user.role=='ADMIN' %}<div class="nav-caption">COLLEGE SETUP</div>{% for key,value in catalog.items() %}<a href="{{ url_for('catalog_page',entity=key) }}">{{ value[0] }}</a>{% endfor %}<a href="{{ url_for('users') }}">User accounts</a><a href="{{ url_for('audit_page') }}">Activity log</a>{% endif %}
+</nav><div class="sidebar-bottom"><span class="avatar">{{ user.username[0]|upper }}</span><div>{{ user.username }}<small>{{ user.role|label }}</small></div><form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="signout" aria-label="Sign out" title="Sign out">↗</button></form></div></aside>{% endif %}
+<main class="{{ 'workspace' if user else 'public' }}">{% if user %}<header class="topbar"><span>COLLEGE OPERATIONS</span><span class="pill">Local demonstration</span></header>{% endif %}<div class="content">{% for category,message in get_flashed_messages(with_categories=true) %}<div role="status" class="flash {{ category }}">{{ message }}</div>{% endfor %}{% block content %}{% endblock %}</div>{% if user %}<footer class="page-footer">Campus Ledger · DBMS Project 01 <span>Python + MySQL</span></footer>{% endif %}</main></body></html>

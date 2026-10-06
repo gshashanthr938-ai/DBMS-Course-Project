@@ -1,0 +1,115 @@
+Tables_in_college_pbl_presentation
+app_user
+attendance
+audit_event
+class_session
+course
+course_offering
+department
+exam_result
+examination
+faculty
+fee_bill
+grade
+grade_scale
+guardian
+payment
+programme
+programme_course
+registration
+semester
+student
+student_guardian
+v_academic_history
+v_attendance_summary
+v_fee_balance
+v_result_analysis
+Table	Create Table
+student	CREATE TABLE `student` (
+  `student_id` int NOT NULL AUTO_INCREMENT,
+  `programme_id` int NOT NULL,
+  `registration_no` varchar(24) NOT NULL,
+  `full_name` varchar(100) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `email` varchar(120) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `admission_date` date NOT NULL,
+  `student_status` varchar(12) NOT NULL DEFAULT 'ACTIVE',
+  PRIMARY KEY (`student_id`),
+  UNIQUE KEY `registration_no` (`registration_no`),
+  KEY `programme_id` (`programme_id`),
+  KEY `idx_student_name` (`full_name`),
+  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`programme_id`) REFERENCES `programme` (`programme_id`),
+  CONSTRAINT `student_chk_1` CHECK ((`student_status` in (_cp850'ACTIVE',_cp850'GRADUATED',_cp850'WITHDRAWN'))),
+  CONSTRAINT `student_chk_2` CHECK ((`date_of_birth` < `admission_date`))
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+Table	Create Table
+registration	CREATE TABLE `registration` (
+  `registration_id` int NOT NULL AUTO_INCREMENT,
+  `student_id` int NOT NULL,
+  `offering_id` int NOT NULL,
+  `registered_on` date NOT NULL,
+  `registration_status` varchar(10) NOT NULL DEFAULT 'ACTIVE',
+  `dropped_on` date DEFAULT NULL,
+  PRIMARY KEY (`registration_id`),
+  UNIQUE KEY `student_id` (`student_id`,`offering_id`),
+  KEY `idx_registration_roster` (`offering_id`,`registration_status`),
+  CONSTRAINT `registration_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
+  CONSTRAINT `registration_ibfk_2` FOREIGN KEY (`offering_id`) REFERENCES `course_offering` (`offering_id`),
+  CONSTRAINT `registration_chk_1` CHECK ((((`registration_status` = _cp850'ACTIVE') and (`dropped_on` is null)) or ((`registration_status` = _cp850'DROPPED') and (`dropped_on` >= `registered_on`))))
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+registration_no	full_name	course_code	section_code	academic_year	term_name
+2026CS001	Aarav Sharma	CS301	A	2026-27	Odd
+2026CS001	Aarav Sharma	CS302	A	2026-27	Odd
+2026CS002	Diya Patel	CS301	A	2026-27	Odd
+2026CS002	Diya Patel	CS302	A	2026-27	Odd
+2026CS003	Ishaan Verma	CS301	A	2026-27	Odd
+2026CS003	Ishaan Verma	CS302	A	2026-27	Odd
+2026CS004	Ananya Singh	CS301	A	2026-27	Odd
+2026CS004	Ananya Singh	CS302	A	2026-27	Odd
+2026CS005	Rohan Gupta	CS301	A	2026-27	Odd
+2026CS005	Rohan Gupta	CS302	A	2026-27	Odd
+2026CS006	Kavya Reddy	CS301	A	2026-27	Odd
+2026CS006	Kavya Reddy	CS302	A	2026-27	Odd
+2026CS007	Aditya Rao	CS301	A	2026-27	Odd
+2026CS007	Aditya Rao	CS302	A	2026-27	Odd
+2026CS008	Meera Joshi	CS301	A	2026-27	Odd
+course_code	section_code	active_students
+CS301	A	9
+CS301	B	0
+CS302	A	9
+CS303	A	0
+EC301	A	3
+bill_no	full_name	total_amount	paid_amount	balance
+BILL-001	Aarav Sharma	20000.00	20000.00	0.00
+BILL-002	Diya Patel	20000.00	8000.00	12000.00
+BILL-003	Ishaan Verma	20000.00	20000.00	0.00
+BILL-004	Ananya Singh	20000.00	8000.00	12000.00
+BILL-005	Rohan Gupta	20000.00	8000.00	12000.00
+BILL-006	Kavya Reddy	20000.00	8000.00	12000.00
+BILL-007	Aditya Rao	20000.00	20000.00	0.00
+BILL-008	Meera Joshi	20000.00	8000.00	12000.00
+BILL-009	Vihaan Shah	20000.00	8000.00	12000.00
+BILL-010	Sara Khan	18000.00	0.00	18000.00
+table_name	records
+department	5
+programme	5
+course	5
+faculty	5
+semester	5
+student	12
+guardian	11
+student_guardian	12
+programme_course	5
+course_offering	5
+registration	21
+class_session	12
+attendance	83
+examination	6
+exam_result	41
+grade_scale	7
+grade	9
+fee_bill	12
+payment	9
+app_user	7
+audit_event	5

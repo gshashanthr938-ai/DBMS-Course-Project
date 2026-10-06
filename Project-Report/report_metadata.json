@@ -1,0 +1,18 @@
+{
+  "course_name_code": "[ADD COURSE NAME AND CODE]",
+  "faculty_guide": "[ADD FACULTY NAME]",
+  "academic_year": "[ADD ACADEMIC YEAR]",
+  "contributions": {
+    "Golamari Shashanth Reddy": "[ADD ACTUAL CONTRIBUTION]",
+    "Hansini Baggu": "[ADD ACTUAL CONTRIBUTION]",
+    "Kandibanda Balaji": "[ADD ACTUAL CONTRIBUTION]"
+  },
+  "commit_links": {
+    "Golamari Shashanth Reddy": "[ADD COMMIT LINK]",
+    "Hansini Baggu": "[ADD COMMIT LINK]",
+    "Kandibanda Balaji": "[ADD COMMIT LINK]"
+  },
+  "repository_url": "https://github.com/gshashanthr938-ai/DBMS-Course-Project",
+  "repository_owner": "gshashanthr938-ai",
+  "collaborators": "hansini215-crypto, balajikandibanda123-eng"
+}
