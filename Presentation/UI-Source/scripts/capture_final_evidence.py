@@ -83,7 +83,9 @@ with app.test_client() as client:
     remaining = db.query('SELECT department_id FROM department WHERE department_code=%s',
                          ('DEMO-QA',),one=True)
     count_after_delete = db.query('SELECT COUNT(*) AS n FROM department',one=True)['n']
-    if remaining or (count_before,count_after_insert,count_after_delete)!=(5,6,5):
+    if (remaining or count_before < 11 or
+            count_after_insert != count_before + 1 or
+            count_after_delete != count_before):
         raise RuntimeError('UI delete was not reflected in MySQL')
     capture(client,'15-department-after-delete','/catalog/departments')
     capture(client,'16-audit-log','/audit')

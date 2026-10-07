@@ -6,3 +6,6 @@
 **/*.log
 **/.env
 **/data/
+.codex-finalizer/
+.codex-presentation/
+tmp/

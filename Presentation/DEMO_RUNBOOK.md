@@ -4,7 +4,7 @@
 
 1. Run `UI-Source/start.ps1` in PowerShell. On a fresh checkout, it creates a
    private MySQL 8 database named `college_pbl_presentation`, imports the full
-   21-table SQL script with at least five rows per table, saves local credentials
+   21-table SQL script with at least eleven rows per table, saves local credentials
    in ignored `UI-Source/.local`, and opens `http://127.0.0.1:5080`.
 2. Sign in with the local synthetic demo account in
    `UI-Source/DEMO_ACCOUNTS.md` (admin is easiest for the review).
@@ -52,11 +52,11 @@ the active database: the script intentionally refuses duplicate tables.
 
 ## Three-minute UI segment
 
-1. Open **Departments** as admin: the starting count is five.
+1. Open **Departments** as admin: the starting count is eleven.
 2. Add department code `DEMO-QA` and name `Quality Assurance Demo`.
 3. Refresh the UI and run `SELECT COUNT(*) FROM department;` in MySQL: both
    show six, including `DEMO-QA`.
-4. Delete that demonstration department and repeat the count: both show five;
+4. Delete that demonstration department and repeat the count: both show eleven;
    `SELECT * FROM department WHERE department_code='DEMO-QA';` returns none.
 5. Open **Students**, **Attendance**, **Examinations**, **Fees** and **Reports**
    to show the wider system if time permits.

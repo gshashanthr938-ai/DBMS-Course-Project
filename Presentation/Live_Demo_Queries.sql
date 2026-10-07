@@ -33,7 +33,7 @@ JOIN student AS s ON s.student_id=b.student_id
 ORDER BY b.bill_no
 LIMIT 10;
 
--- Proof of at least five records in every base table after running 05.
+-- Proof of at least eleven records in every base table after running 06.
 SELECT 'department' AS table_name,COUNT(*) AS records FROM department
 UNION ALL SELECT 'programme',COUNT(*) FROM programme
 UNION ALL SELECT 'course',COUNT(*) FROM course

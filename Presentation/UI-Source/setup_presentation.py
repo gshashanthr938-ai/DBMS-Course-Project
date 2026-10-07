@@ -95,7 +95,7 @@ def main():
     finally:
         connection.close()
 
-    print(f'Created {DATABASE}, with at least five rows in every table.')
+    print(f'Created {DATABASE}, with at least eleven rows in every table.')
     print('App configuration saved in ignored .local/config.json.')
 
 

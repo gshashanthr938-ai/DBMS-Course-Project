@@ -10,7 +10,7 @@ supplied schedule lists this project at 9:00–9:10 a.m. on 6 October 2026.
 | 0:00–1:00 | 1–2 | Problem, objectives, scope and six user roles. |
 | 1:00–3:00 | 3–5 | Four ER views, registration as the key bridge, PK/FK schema, 3NF. |
 | 3:00–5:00 | 6–7 | Show the SQL script, 21-table row counts, a join, an aggregate and a fee-balance query. |
-| 5:00–8:00 | 8–9 and live app | Log in; show department count 5, insert DEMO-QA, confirm 6 in UI and MySQL, delete, confirm 5. Show student, attendance, grades and fees if time. |
+| 5:00–8:00 | 8–9 and live app | Log in; show department count 11, insert DEMO-QA, confirm 12 in UI and MySQL, delete, confirm 11. Show student, attendance, grades and fees if time. |
 | 8:00–10:00 | 10 | Summarize verification and answer questions. |
 
 The live demo commands and login are in `DEMO_RUNBOOK.md`. If the database is

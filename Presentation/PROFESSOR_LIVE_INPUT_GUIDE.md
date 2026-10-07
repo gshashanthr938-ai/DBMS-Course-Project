@@ -22,6 +22,17 @@ manual steps below perform the same setup.
 
 Ask the professor for a department code and department name.
 
+Direct SQL example, if the professor asks for the commands:
+
+```sql
+INSERT INTO department (department_code, department_name)
+VALUES ('DEMO-AI', 'Artificial Intelligence');
+
+SELECT * FROM department WHERE department_code = 'DEMO-AI';
+
+DELETE FROM department WHERE department_code = 'DEMO-AI';
+```
+
 1. In the website, open **Departments** and add that record.
 2. In the database console, run:
 
@@ -32,9 +43,11 @@ ORDER BY department_id DESC
 LIMIT 5;
 ```
 
-The new website input appears as a real row in MySQL. Delete the demonstration
+The department count changes from 11 to 12. The new website input appears as a
+real row in MySQL. Delete the demonstration
 department through the website only if no programme, course or faculty record
-uses it. Run the same query again to show that the row is gone.
+uses it. Run the same query again to show that the row is gone and the count is
+back to 11.
 
 ## Demonstration 2: show a foreign-key relationship
 

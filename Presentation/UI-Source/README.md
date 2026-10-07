@@ -6,7 +6,7 @@ Campus Ledger is the complete implementation of DBMS Project 01, the Student and
 
 - 21 relational tables in Third Normal Form, including the 13 principal entities required by the brief
 - foreign keys, unique keys, checks, indexes, triggers and transaction-safe stored procedures
-- synthetic sample data for 12 students, five course sections, attendance, examinations and fee records
+- synthetic sample data with at least eleven rows in every base table
 - administrator, faculty, examination, accounts, student and head-of-department roles
 - six live reports with CSV export
 - 45 automated tests against an isolated MySQL test database
@@ -18,7 +18,7 @@ Campus Ledger is the complete implementation of DBMS Project 01, the Student and
 2. Open PowerShell in this folder.
 3. Run `powershell -ExecutionPolicy Bypass -File .\start.ps1`.
 
-The script creates a project-only MySQL data directory on port 3308, installs the Python packages into `.venv`, imports the complete presentation database with at least five rows per table, and opens the application at `http://127.0.0.1:5080`.
+The script creates a project-only MySQL data directory on port 3308, installs the Python packages into `.venv`, imports the complete presentation database with at least eleven rows per table, and opens the application at `http://127.0.0.1:5080`.
 
 The setup never drops or edits an existing college-management database. Test runs use a separate `college_test` database. The project-only database files and passwords stay under `.local`, which is excluded from Git.
 
@@ -39,7 +39,7 @@ Run the scripts in this order for a manual empty-database installation:
 3. `sql/03_views_reports.sql`
 4. `sql/04_sample_data.sql`
 
-The parent folder's `DBMS_Course_Project_All_Commands.sql` combines these scripts and the five-row supplement. `setup_presentation.py` is the first-run installer because it also creates the restricted application account. `setup.py` is retained for isolated test database setup. All contacts are synthetic `example.test` records.
+The parent folder's `DBMS_Course_Project_All_Commands.sql` combines these scripts and the eleven-row supplement. `setup_presentation.py` is the first-run installer because it also creates the restricted application account. `setup.py` is retained for isolated test database setup. All contacts are synthetic `example.test` records.
 
 ## Tests
 

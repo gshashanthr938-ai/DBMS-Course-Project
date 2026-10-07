@@ -75,11 +75,17 @@ registration_no	full_name	course_code	section_code	academic_year	term_name
 2026CS007	Aditya Rao	CS302	A	2026-27	Odd
 2026CS008	Meera Joshi	CS301	A	2026-27	Odd
 course_code	section_code	active_students
+CH301	A	0
 CS301	A	9
 CS301	B	0
 CS302	A	9
 CS303	A	0
 EC301	A	3
+EE301	A	0
+EN301	A	0
+MA301	A	0
+MG301	A	0
+PH301	A	0
 bill_no	full_name	total_amount	paid_amount	balance
 BILL-001	Aarav Sharma	20000.00	20000.00	0.00
 BILL-002	Diya Patel	20000.00	8000.00	12000.00
@@ -90,26 +96,26 @@ BILL-006	Kavya Reddy	20000.00	8000.00	12000.00
 BILL-007	Aditya Rao	20000.00	20000.00	0.00
 BILL-008	Meera Joshi	20000.00	8000.00	12000.00
 BILL-009	Vihaan Shah	20000.00	8000.00	12000.00
-BILL-010	Sara Khan	18000.00	0.00	18000.00
+BILL-010	Sara Khan	18000.00	8000.00	10000.00
 table_name	records
-department	5
-programme	5
-course	5
-faculty	5
-semester	5
-student	12
-guardian	11
-student_guardian	12
-programme_course	5
-course_offering	5
-registration	21
-class_session	12
+app_user	11
 attendance	83
-examination	6
-exam_result	41
-grade_scale	7
-grade	9
+audit_event	15
+class_session	12
+course	11
+course_offering	11
+department	11
+exam_result	42
+examination	12
+faculty	11
 fee_bill	12
-payment	9
-app_user	7
-audit_event	5
+grade	11
+grade_scale	11
+guardian	11
+payment	11
+programme	11
+programme_course	11
+registration	21
+semester	11
+student	12
+student_guardian	12

@@ -17,9 +17,9 @@ from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, PageBreak,
 ROOT=Path(__file__).resolve().parent.parent
 PRE=ROOT/'Presentation'
 APP=PRE/'UI-Source'
-OUT=ROOT/'Project-Report'/'Student_College_Management_Final_Project_Report.pdf'
+OUT=ROOT/'output'/'pdf'/'Student_College_Management_Final_Project_Report_11Plus.pdf'
 OUT.parent.mkdir(parents=True,exist_ok=True)
-metadata=json.loads((OUT.parent/'report_metadata.json').read_text(encoding='utf-8'))
+metadata=json.loads((ROOT/'Project-Report'/'report_metadata.json').read_text(encoding='utf-8'))
 
 admin=json.loads((APP/'.local'/'admin.json').read_text(encoding='utf-8'))
 conn=pymysql.connect(host=admin['host'],port=admin['port'],user='root',password=admin['password'],
@@ -84,7 +84,7 @@ def h(number,title):
     p(f'{number}  {escape(title)}','H1x')
 def sub(title): p(escape(title),'H2x')
 def gap(n=7): story.append(Spacer(1,n))
-def bullet(value): p('• '+value)
+def bullet(value): p('- '+value)
 def code(value): story.append(KeepTogether([Preformatted(value,styles['CodeX'])]))
 def table(headers,rows,widths=None,small=False):
     st=styles['Smallx'] if small else styles['Bodyx']
@@ -135,7 +135,7 @@ story.append(PageBreak())
 # 2 Abstract
 h(2,'Abstract')
 p('Campus Ledger is a local Student and College Management System that connects academic and fee records in a relational database. The problem addressed is repeated and inconsistent student data across admissions, course registration, attendance, examinations and accounts. The project uses a conceptual ER model, a MySQL 8 schema in Third Normal Form, integrity constraints and a role-based Flask web interface. Twenty-one base tables represent students, guardians, departments, programmes, courses, faculty, semesters, course offerings, registrations, class sessions, attendance, examinations, results, grades, fee bills and payments, with supporting tables for users and audit events. Four views derive reporting data.')
-p('The implemented interface supports insertion, deletion where records are unused, viewing, registrations, attendance, examination outcomes, grade publication, payment receipts and six CSV reports. A presentation database was populated with at least five synthetic records in each base table. The combined SQL file was executed on MySQL 8.0.46; a UI department record was inserted and deleted, with counts verified as 5, 6 and 5. The automated test suite completed with 45 passes, zero failures and zero errors. Demonstration attendance and grading values are sample rules, so institutional policy approval is required before real deployment.')
+p('The implemented interface supports insertion, deletion where records are unused, viewing, registrations, attendance, examination outcomes, grade publication, payment receipts and six CSV reports. A presentation database was populated with at least eleven synthetic records in each base table. The combined SQL file was executed on MySQL 8.0.46; a UI department record was inserted and deleted, with counts verified as 11, 12 and 11. The automated test suite completed with 45 passes, zero failures and zero errors. Demonstration attendance and grading values are sample rules, so institutional policy approval is required before real deployment.')
 
 # 3 Introduction and problem
 h(3,'Introduction and problem statement')
@@ -194,7 +194,7 @@ rels=[]
 for t in tables:
     pk=[r['COLUMN_NAME'] for r in key_rows if r['TABLE_NAME']==t and r['CONSTRAINT_NAME']=='PRIMARY']
     parent=sorted({r['REFERENCED_TABLE_NAME'] for r in key_rows if r['TABLE_NAME']==t and r['REFERENCED_TABLE_NAME']})
-    rels.append((t,', '.join(pk),' / '.join(parent) if parent else '—',purpose.get(t,'')))
+    rels.append((t,', '.join(pk),' / '.join(parent) if parent else '-',purpose.get(t,'')))
 table(['Table','Primary key','Parent table(s)','Purpose'],rels,[102,135,132,133],small=True)
 sub('Third Normal Form justification')
 p('Each table stores one subject and every non-key attribute describes its key. Student stores programme_id, while the department comes through Programme, avoiding a transitive dependency. Many-to-many associations are represented by StudentGuardian, ProgrammeCourse and Registration. Repeated events such as class sessions, results and payments are separate rows. Balances and attendance percentages are calculated in views rather than stored as editable duplicates.')
@@ -208,9 +208,9 @@ for c in columns:
     if c['COLUMN_KEY']=='PRI': key.append('PK')
     if c['COLUMN_KEY']=='UNI': key.append('UNIQUE')
     if (c['TABLE_NAME'],c['COLUMN_NAME']) in fks:
-        key.append('FK → '+fks[(c['TABLE_NAME'],c['COLUMN_NAME'])])
+        key.append('FK -> '+fks[(c['TABLE_NAME'],c['COLUMN_NAME'])])
     if c['EXTRA']: key.append(c['EXTRA'])
-    by_table[c['TABLE_NAME']].append((c['COLUMN_NAME'],c['COLUMN_TYPE'],c['IS_NULLABLE'],', '.join(key) or '—'))
+    by_table[c['TABLE_NAME']].append((c['COLUMN_NAME'],c['COLUMN_TYPE'],c['IS_NULLABLE'],', '.join(key) or '-'))
 for t in tables:
     sub(t)
     table(['Column','Type','Null?','Key / extra'],by_table[t],[152,154,49,147],small=True)
@@ -219,12 +219,12 @@ for t in tables:
 story.append(PageBreak());h(9,'SQL commands used with sample outputs')
 p('The file <b>Presentation/DBMS_Course_Project_All_Commands.sql</b> is runnable in a fresh MySQL 8 database. It includes database creation, 21 table definitions, procedures, triggers, views, synthetic INSERT statements and SELECT queries. The MySQL execution transcript is supplied as <b>SQL_Execution_Output.txt</b>.')
 code('''CREATE DATABASE college_pbl_presentation\n  CHARACTER SET utf8mb4;\nCREATE TABLE department (\n  department_id INT AUTO_INCREMENT PRIMARY KEY,\n  department_code VARCHAR(12) NOT NULL UNIQUE,\n  department_name VARCHAR(120) NOT NULL\n);\nINSERT INTO department (department_code, department_name)\nVALUES ('CSE', 'Computer Science and Engineering');''')
-p('The presentation script then adds synthetic rows to satisfy the five-per-table requirement. A final SELECT verified these counts after import:')
+p('The presentation script then adds synthetic rows so every base table contains more than ten records. A final SELECT verified these counts after import:')
 table(['Base table','Rows','Base table','Rows'],
       [(tables[i],counts[tables[i]],tables[i+11] if i+11<len(tables) else '',
         counts[tables[i+11]] if i+11<len(tables) else '') for i in range(11)],
       [177,74,177,74],small=True)
-p('The temporary UI demonstration row was removed after capture; the department count therefore remains five. Audit events may increase when the UI is used.')
+p('The temporary UI demonstration row was removed after capture; the department count therefore remains eleven. Audit events may increase when the UI is used.')
 
 # 10 Query outputs
 h(10,'Queries with outputs')
@@ -256,11 +256,11 @@ image_pair(PRE/'screenshots'/'05-fees.png',PRE/'screenshots'/'06-reports.png',
 sub('Before and after insertion and deletion')
 image_pair(PRE/'screenshots'/'13-department-before-insert.png',
            PRE/'screenshots'/'14-department-after-insert-before-delete.png',
-           'Before insert: five departments.','After insert: DEMO-QA shown, six departments.')
+           'Before insert: eleven departments.','After insert: DEMO-QA shown, twelve departments.')
 image_pair(PRE/'screenshots'/'14-department-after-insert-before-delete.png',
            PRE/'screenshots'/'15-department-after-delete.png',
            'Before delete: DEMO-QA is present.','After delete: DEMO-QA is absent.')
-p('The UI create and delete actions changed the live department count from 5 to 6 and back to 5; the exact SELECT evidence is in <b>Presentation/CRUD_Database_Evidence.txt</b>.')
+p('The UI create and delete actions changed the live department count from 11 to 12 and back to 11; the exact SELECT evidence is in <b>Presentation/CRUD_Database_Evidence.txt</b>.')
 
 # 12 Implementation
 story.append(PageBreak())
@@ -279,7 +279,7 @@ p('The UI module source is in <b>Presentation/UI-Source</b>; the complete SQL is
 h(13,'Testing: cases and results')
 p(f'The automated suite was run against a separate MySQL test database on 6 October 2026: <b>{tests} tests passed, {failures} failures, {errors} errors</b>. The result file is Presentation/UI-Source/docs/test-results-final.xml. The main presentation database was not reset by the tests.')
 table(['Test area','Expected result','Observed'],[
- ('Role permissions','Unauthorized account cannot access another role’s page','Pass'),
+ ('Role permissions',"Unauthorized account cannot access another role's page",'Pass'),
  ('CSRF and input validation','Invalid or missing token/value is rejected','Pass'),
  ('Course registration','Eligibility, duplicate and capacity rules enforced','Pass'),
  ('Concurrent last seat','Only one competing registration succeeds','Pass'),
@@ -287,12 +287,12 @@ table(['Test area','Expected result','Observed'],[
  ('Grade publication','Incomplete results prevent publication','Pass'),
  ('Concurrent payment','Overpayment cannot be recorded','Pass'),
  ('Reports and CSV','Expected rows and export delivered','Pass'),
- ('UI CRUD demonstration','Department count changes 5 → 6 → 5','Pass'),
+ ('UI CRUD demonstration','Department count changes 11 -> 12 -> 11','Pass'),
 ],[148,275,79],small=True)
 
 # 14 Conclusion
 h(14,'Conclusion and future enhancements')
-p('The completed prototype turns separate college records into linked, queryable data. MySQL constraints protect relationships; views compute report values; the Flask interface supports the main academic and fee workflows. The fresh presentation database met the five-row minimum for every table, the UI insert/delete actions were reflected in MySQL, and the automated suite passed.')
+p('The completed prototype turns separate college records into linked, queryable data. MySQL constraints protect relationships; views compute report values; the Flask interface supports the main academic and fee workflows. The presentation database contains at least eleven rows in every table, the UI insert/delete actions were reflected in MySQL, and the automated suite passed.')
 for item in [
  'Replace demonstration attendance and grading rules with approved institutional policy.',
  'Add managed deployment, HTTPS, backup monitoring and a tested recovery process.',
@@ -311,7 +311,7 @@ for ref in [
  '[6] PyMySQL Documentation, https://pymysql.readthedocs.io/en/latest/'
 ]: p(escape(ref))
 
-# 16 Contributions — intentionally left for real attribution
+# 16 Contributions - intentionally left for real attribution
 h(16,'Contribution of each member')
 p('Complete this section with actual work and matching GitHub commits. The team requested editable placeholders; no contribution is assigned without confirmation.')
 table(['Member','Actual contribution','Commit evidence'],[

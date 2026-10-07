@@ -11,9 +11,10 @@ examinations, grades, fee bills, payments and reports in a MySQL-backed web appl
 | Hansini Baggu | 25WU0101045 |
 | Kandibanda Balaji | 25WU0101057 |
 
-- `Presentation/` contains the final slides, PDF, ER diagrams, complete SQL
-  commands, UI source and screenshots.
-- `Project-Report/` contains the final report PDF.
+- `Presentation/Final/` contains the latest PowerPoint with the 11-plus-record
+  evidence. `Presentation/` also contains the ER diagrams, complete SQL,
+  demonstration guides, UI source and screenshots.
+- `output/pdf/` contains the latest project report with verified table counts.
 
 **Course name/code:** [ADD]
 

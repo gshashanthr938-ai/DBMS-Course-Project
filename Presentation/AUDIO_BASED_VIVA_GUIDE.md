@@ -58,6 +58,11 @@ Exact answer: "The frontend uses HTML, CSS, Jinja templates and vanilla
 JavaScript. The backend uses Python Flask. PyMySQL connects Flask to MySQL 8.
 Waitress runs the local web server, and pytest runs the automated tests."
 
+If the professor wants only two short lines, say:
+
+- Frontend: HTML, CSS, JavaScript and Jinja.
+- Backend: Python Flask with MySQL through PyMySQL.
+
 ## Website flow
 
 1. The browser requests a page from Flask.
@@ -237,6 +242,21 @@ so two simultaneous users cannot take the final seat or overpay the same bill.
 
 ## Live insert and delete
 
+Safe SQL example using a temporary department with no child records:
+
+```sql
+INSERT INTO department (department_code, department_name)
+VALUES ('DEMO-AI', 'Artificial Intelligence');
+
+SELECT * FROM department WHERE department_code = 'DEMO-AI';
+
+DELETE FROM department WHERE department_code = 'DEMO-AI';
+```
+
+The same demonstration can be performed through the Departments page. Add the
+temporary code and name, confirm that it appears, click Delete, and confirm that
+it has disappeared. The database count changes from 11 to 12 and back to 11.
+
 Run `Presentation/START_PRESENTATION.ps1`. Enter a department through the
 website, then run this in the database console:
 
@@ -265,14 +285,9 @@ LIMIT 10;
 
 ## Record-count question from the audio
 
-The official supplied brief requires at least five records in every base table,
-and Campus Ledger satisfies that requirement. Several tables also have more
-than ten records: Student 12, Guardian 11, Student Guardian 12, Registration 21,
-Class Session 12, Attendance 83, Exam Result 41 and Fee Bill 12.
-
-If asked to display ten records, use Student, Registration, Attendance, Exam
-Result or Fee Bill. Do not claim that every table has ten records; several
-master tables contain five because the official requirement was five per table.
+The presentation database contains at least eleven synthetic records in every
+one of its 21 base tables. Run the count query in `Live_Demo_Queries.sql` to show
+all table names and record counts together.
 
 ## Testing questions
 
