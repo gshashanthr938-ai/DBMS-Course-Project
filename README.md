@@ -16,11 +16,11 @@ examinations, grades, fee bills, payments and reports in a MySQL-backed web appl
   demonstration guides, UI source and screenshots.
 - `output/pdf/` contains the latest project report with verified table counts.
 
-**Course name/code:** [ADD]
+**Course name/code:** Database Managing System
 
-**Faculty guide:** [ADD]
+**Faculty guide:** Dr.Kiran Mayee Adavala
 
-**Academic year:** [ADD]
+**Academic year:** 2025-29
 **GitHub repository URL:** https://github.com/gshashanthr938-ai/DBMS-Course-Project
 
 See `Presentation/DEMO_RUNBOOK.md` before the live demonstration. This is a
