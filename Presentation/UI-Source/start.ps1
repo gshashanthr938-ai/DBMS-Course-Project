@@ -7,7 +7,20 @@ $configFile = Join-Path $projectDir '.local\config.json'
 
 if (-not (Test-Path -LiteralPath $mysqlExe)) { throw 'MySQL Server 8.0 was not found in the expected Program Files location.' }
 if (-not (Test-Path -LiteralPath $pythonExe)) {
-    py -3 -m venv (Join-Path $projectDir '.venv')
+    $pythonLauncher = Get-Command py -ErrorAction SilentlyContinue
+    if ($pythonLauncher) {
+        & $pythonLauncher.Source -3 -m venv (Join-Path $projectDir '.venv')
+    } else {
+        $bundledPython = 'C:\Users\gshas\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
+        if (Test-Path -LiteralPath $bundledPython) {
+            & $bundledPython -m venv (Join-Path $projectDir '.venv')
+        } else {
+            $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
+            if (-not $pythonCommand) { throw 'Python 3 was not found. Install Python 3.12 or later and rerun start.ps1.' }
+            & $pythonCommand.Source -m venv (Join-Path $projectDir '.venv')
+        }
+    }
+    if (-not (Test-Path -LiteralPath $pythonExe)) { throw 'Python could not create the project virtual environment.' }
     & (Join-Path $projectDir '.venv\Scripts\python.exe') -m pip install -r (Join-Path $projectDir 'requirements.txt')
 }
 if (-not (Test-Path -LiteralPath $dataDir)) {
